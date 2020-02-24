@@ -2023,11 +2023,11 @@ void NDArray::SyncCopyFromNDArray(const NDArray& src, int i, int j) {
 
 void NDArray::SyncCopyToCPU(void *data, size_t size) const {
   mxnet::TShape dshape = this->shape();
-  if (!features::is_enabled(features::INT64_TENSOR_SIZE)) {
-    CHECK_LT(size, (int64_t{1} << 31) - 1) <<
-              "[SyncCopyToCPU] Size of tensor you are trying to allocate is larger than "
-              "2^31 elements. Please build with flag USE_INT64_TENSOR_SIZE=1";
-  }
+  // if (!features::is_enabled(features::INT64_TENSOR_SIZE)) {
+  //   CHECK_LT(size, (int64_t{1} << 31) - 1) <<
+  //             "[SyncCopyToCPU] Size of tensor you are trying to allocate is larger than "
+  //             "2^31 elements. Please build with flag USE_INT64_TENSOR_SIZE=1";
+  // }
   CHECK_EQ(dshape.Size(), size)
       << "Memory size do not match";
   // zero-size array, no need to copy
